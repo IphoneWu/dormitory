@@ -1,20 +1,28 @@
 package hstc.edu.cn.po;
 
+import java.util.Date;
+
 /**
  * Created by win8 on 2017/5/15.
  */
 public class DormAdmin {
     private int dormadminId;
+    private String dormadminNum;
     private String dormadminName;
     private String dormadminPassword;
-    private int areaNum;
+    private String dormadminPhone;
+    private String dormadminSex;
+    private Date dormadminSbirth;
+    private String dormadminImage;
+    private int buildNum;
+    private int adminType;
 
-    public int getAreaNum() {
-        return areaNum;
+    public int getBuildNum() {
+        return buildNum;
     }
 
-    public void setAreaNum(int areaNum) {
-        this.areaNum = areaNum;
+    public void setBuildNum(int buildNum) {
+        this.buildNum = buildNum;
     }
 
     public int getDormadminId() {
@@ -39,5 +47,53 @@ public class DormAdmin {
 
     public void setDormadminPassword(String dormadminPassword) {
         this.dormadminPassword = dormadminPassword;
+    }
+
+    public String getDormadminImage() {
+        return dormadminImage;
+    }
+
+    public void setDormadminImage(String dormadminImage) {
+        this.dormadminImage = dormadminImage;
+    }
+
+    public Date getDormadminSbirth() {
+        return dormadminSbirth;
+    }
+
+    public void setDormadminSbirth(Date dormadminSbirth) {
+        this.dormadminSbirth = dormadminSbirth;
+    }
+
+    public String getDormadminSex() {
+        return dormadminSex;
+    }
+
+    public void setDormadminSex(String dormadminSex) {
+        this.dormadminSex = dormadminSex;
+    }
+
+    public int getAdminType() {
+        return adminType;
+    }
+
+    public void setAdminType(int adminType) {
+        this.adminType = adminType;
+    }
+
+    public String getDormadminPhone() {
+        return dormadminPhone;
+    }
+
+    public void setDormadminPhone(String dormadminPhone) {
+        this.dormadminPhone = dormadminPhone;
+    }
+
+    public String getDormadminNum() {
+        return dormadminNum;
+    }
+
+    public void setDormadminNum(String dormadminNum) {
+        this.dormadminNum = dormadminNum;
     }
 }

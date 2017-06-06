@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hstc.edu.cn.mapper.StudentMapper">
+    <resultMap type="Student" id="studentResult">
+        <result property="studentNum" column="studentNum"/>
+        <result property="studentName" column="studentName"/>
+        <result property="studentSex" column="studentSex"/>
+        <result property="studentBirth" column="studentBirth"/>
+        <result property="areaNum" column="areaNum"/>
+        <result property="buildNum" column="buildNum"/>
+        <result property="dormNum" column="dormNum"/>
+        <result property="bedNum" column="bedNum"/>
+        <result property="collegeName" column="collegeName"/>
+        <result property="clazzNum" column="clazzNum"/>
+        <result property="clazzName" column="clazzName"/>
+        <result property="studentInTime" column="studentInTime"/>
+    </resultMap>
+
+    <select id="getStudent" parameterType="Map" resultMap="studentResult">
+        SELECT * from student limit #{start},#{pageSize}
+    </select>
+
+
+    <select id="getStuTotal" parameterType="Map" resultType="long">
+        select count(*) from `student`
+    </select>
+
+    <select id="searchStu" parameterType="Map" resultMap="studentResult">
+        SELECT * FROM student
+        <where>
+            <if test="stuSearch!=null and stuSearch!=''">
+                studentNum LIKE #{stuSearch}
+                OR studentName LIKE #{stuSearch}
+                OR studentSex LIKE #{stuSearch}
+                OR DATE_FORMAT(studentBirth,'%Y年%m月%d日') LIKE #{stuSearch}
+                OR areaNum LIKE #{stuSearch}
+                OR buildNum LIKE #{stuSearch}
+                OR dormNum LIKE #{stuSearch}
+                OR bedNum LIKE #{stuSearch}
+                OR collegeName LIKE #{stuSearch}
+                OR clazzNum LIKE #{stuSearch}
+                OR clazzName LIKE #{stuSearch}
+                OR DATE_FORMAT(studentInTime,'%Y年%m月%d日') LIKE #{stuSearch}
+            </if>
+        </where>
+        <if test="start!=null and pageSize!=null">
+            limit #{start},#{pageSize}
+        </if>
+    </select>
+    <select id="getStuSearchAll" parameterType="Map" resultType="long">
+        SELECT count(*) FROM student
+        <where>
+            <if test="stuSearch!=null and stuSearch!=''">
+                studentNum LIKE #{stuSearch}
+                OR studentName LIKE #{stuSearch}
+                OR studentSex LIKE #{stuSearch}
+                OR DATE_FORMAT(studentBirth,'%Y年%m月%d日') LIKE #{stuSearch}
+                OR areaNum LIKE #{stuSearch}
+                OR buildNum LIKE #{stuSearch}
+                OR dormNum LIKE #{stuSearch}
+                OR bedNum LIKE #{stuSearch}
+                OR collegeName LIKE #{stuSearch}
+                OR clazzNum LIKE #{stuSearch}
+                OR clazzName LIKE #{stuSearch}
+                OR DATE_FORMAT(studentInTime,'%Y年%m月%d日') LIKE #{stuSearch}
+            </if>
+        </where>
+    </select>
+    
+    <delete id="deleteStu" parameterType="Integer">
+        DELETE FROM student WHERE studentNum in
+        <foreach collection="array" item="studentNum" open="(" separator="," close=")">
+            #{studentNum}
+        </foreach>
+    </delete>
+
+    <select id="getModifyStu" parameterType="int" resultMap="studentResult">
+        SELECT * FROM student WHERE studentNum = #{studentNum}
+    </select>
+
+    <update id="modifyStu" parameterType="Student">
+        UPDATE student set studentName=#{studentName},studentSex=#{studentSex},studentBirth=#{studentBirth},areaNum=#{areaNum},
+        buildNum=#{buildNum},dormNum=#{dormNum},bedNum=#{bedNum},collegeName=#{collegeName},clazzName=#{clazzName},clazzNum=#{clazzNum},studentInTime=#{studentInTime}
+        where studentNum = #{studentNum}
+    </update>
+
+    <!--批量导入学生信息-->
+    <insert id="addStudents" parameterType="Student">
+        INSERT INTO student VALUES (#{studentNum},#{studentName},#{studentSex},#{studentBirth},#{areaNum},#{buildNum},#{dormNum},#{bedNum},#{collegeName},#{clazzName},#{clazzNum},#{studentInTime})
+    </insert>
+</mapper>

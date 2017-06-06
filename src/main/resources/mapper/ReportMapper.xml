@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hstc.edu.cn.mapper.ReportMapper">
+    <resultMap type="Report" id="reportResult">
+        <result property="reportId" column="reportId"/>
+        <result property="reportTitle" column="reportTitle"/>
+        <result property="reportSummary" column="reportSummary"/>
+        <result property="report" column="report"/>
+        <result property="reportImage" column="reportImage"/>
+        <result property="reportTime" column="reportTime"/>
+        <result property="reportAuthor" column="reportAuthor"/>
+    </resultMap>
+
+    <insert id="addReport" parameterType="Report" keyProperty="reportId" useGeneratedKeys="true">
+        INSERT report VALUES (NULL,#{reportTitle},#{reportSummary},#{report},#{reportImage},now(),#{reportAuthor})
+    </insert>
+
+    <select id="getAllReport" parameterType="Map" resultMap="reportResult">
+        SELECT * from report
+        <where>
+            <if test="reportAuthor!=null and reportAuthor!=''">
+                reportAuthor = #{reportAuthor}
+            </if>
+        </where>
+        <if test="start!=null and pageSize!=null">
+            limit #{start},#{pageSize}
+        </if>
+    </select>
+    <select id="getReportTotal" parameterType="Map" resultType="long">
+        select count(*) from `report`
+    </select>
+
+</mapper>

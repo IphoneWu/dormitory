@@ -1,5 +1,8 @@
 package hstc.edu.cn.po;
 
+import hstc.edu.cn.util.DateUtil;
+import org.jsoup.helper.DataUtil;
+
 import java.util.Date;
 
 /**
@@ -8,13 +11,24 @@ import java.util.Date;
 public class Student {
     private int studentNum;
     private String studentName;
+    private String studentSex;
+    private String studentBirth;
     private int areaNum;
     private int buildNum;
     private int dormNum;
     private int bedNum;
     private String collegeName;
     private String clazzName;
-    private Date studentInTime;
+    private int clazzNum;
+    private String studentInTime;
+
+    public int getClazzNum() {
+        return clazzNum;
+    }
+
+    public void setClazzNum(int clazzNum) {
+        this.clazzNum = clazzNum;
+    }
 
     public int getAreaNum() {
         return areaNum;
@@ -64,12 +78,12 @@ public class Student {
         this.dormNum = dormNum;
     }
 
-    public Date getStudentInTime() {
+    public String getStudentInTime() {
         return studentInTime;
     }
 
     public void setStudentInTime(Date studentInTime) {
-        this.studentInTime = studentInTime;
+        this.studentInTime = DateUtil.formatDate(studentInTime,"yyyy-MM-dd");
     }
 
     public String getStudentName() {
@@ -86,5 +100,21 @@ public class Student {
 
     public void setStudentNum(int studentNum) {
         this.studentNum = studentNum;
+    }
+
+    public String getStudentBirth() {
+        return studentBirth;
+    }
+
+    public void setStudentBirth(Date studentBirth) {
+        this.studentBirth = DateUtil.formatDate(studentBirth,"yyyy-MM-dd");
+    }
+
+    public String getStudentSex() {
+        return studentSex;
+    }
+
+    public void setStudentSex(String studentSex) {
+        this.studentSex = studentSex;
     }
 }

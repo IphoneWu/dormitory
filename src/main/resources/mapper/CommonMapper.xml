@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hstc.edu.cn.mapper.CommonMapper">
+    <resultMap type="Area" id="areaResult">
+        <result property="areaNum" column="areaNum"/>
+        <result property="areaName" column="areaName"/>
+    </resultMap>
+    <resultMap type="Bed" id="bedResult">
+        <result property="Id" column="Id"/>
+        <result property="bedNum" column="bedNum"/>
+        <result property="dormNum" column="dormNum"/>
+        <result property="buildNum" column="buildNum"/>
+        <result property="areaNum" column="areaNum"/>
+        <result property="bedStatus" column="bedStatus"/>
+    </resultMap>
+    <resultMap type="Build" id="buildResult">
+        <result property="buildNum" column="buildNum"/>
+        <result property="buildName" column="buildName"/>
+        <result property="areaNum" column="areaNum"/>
+        <result property="buildStatus" column="buildStatus"/>
+    </resultMap>
+    <resultMap type="Clazz" id="clazzResult">
+        <result property="clazzNum" column="clazzNum"/>
+        <result property="clazzName" column="clazzName"/>
+        <result property="collegeNum" column="collegeNum"/>
+    </resultMap>
+    <resultMap type="College" id="collegeResult">
+        <result property="collegeNum" column="collegeNum"/>
+        <result property="collegeName" column="collegeName"/>
+    </resultMap>
+    <resultMap type="Dorm" id="dormResult">
+        <result property="id" column="id"/>
+        <result property="dormNum" column="dormNum"/>
+        <result property="buildNum" column="buildNum"/>
+    </resultMap>
+
+    <update id="modifyBedStatus" parameterType="Map">
+        UPDATE bed set bedStatus = #{bedStatus} where bedNum=#{bedNum} and dormNum=#{dormNum} and buildNum=#{buildNum} and areaNum=#{areaNum}
+    </update>
+
+    <!--这里用于修改学生住宿信模块-->
+    <select id="getBedByStatus" parameterType="int" resultMap="bedResult">
+        SELECT * from bed where bedStatus = 0 and dormNum = #{dormNum}
+    </select>
+
+    <select id="getAllArea"  resultMap="areaResult">
+        SELECT * from area
+    </select>
+
+    <select id="getBuildByareaNum" parameterType="int" resultMap="buildResult">
+        SELECT * from build WHERE areaNum = #{areaNum}
+    </select>
+
+    <select id="getDormBybuildNum" parameterType="int" resultMap="dormResult">
+        SELECT * from dorm where  buildNum = #{buildNum}
+    </select>
+    <!---->
+
+</mapper>

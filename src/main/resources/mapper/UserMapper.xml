@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hstc.edu.cn.mapper.UserMapper">
+    <resultMap type="DormAdmin" id="adminResult">
+        <result property="dormadminId" column="dormadminId"/>
+        <result property="dormadminNum" column="dormadminNum"/>
+        <result property="dormadminName" column="dormadminName"/>
+        <result property="dormadminPassword" column="dormadminPassword"/>
+        <result property="dormadminPhone" column="dormadminPhone"/>
+        <result property="dormadminSex" column="dormadminSex"/>
+        <result property="dormadminSbirth" column="dormadminSbirth"/>
+        <result property="dormadminImage" column="dormadminImage"/>
+        <result property="areaNum" column="areaNum"/>
+        <result property="adminType" column="adminType"/>
+    </resultMap>
+
+    <resultMap type="Student" id="studentResult">
+        <result property="studentNum" column="studentNum"/>
+        <result property="studentName" column="studentName"/>
+        <result property="studentSex" column="studentSex"/>
+        <result property="studentBirth" column="studentBirth"/>
+        <result property="areaNum" column="areaNum"/>
+        <result property="buildNum" column="buildNum"/>
+        <result property="dormNum" column="dormNum"/>
+        <result property="bedNum" column="bedNum"/>
+        <result property="collegeName" column="collegeName"/>
+        <result property="clazzName" column="clazzName"/>
+        <result property="studentInTime" column="studentInTime"/>
+    </resultMap>
+    <select id="getDormAdminByNum" parameterType="DormAdmin" resultMap="adminResult">
+          SELECT * from dormadmin WHERE dormadminNum = #{dormadminNum}
+    </select>
+
+    <select id="getDormAdminByName" parameterType="DormAdmin" resultMap="adminResult">
+        SELECT * from dormadmin WHERE dormadminName = #{dormadminName}
+    </select>
+
+    <select id="getDormAdminByPhone" parameterType="DormAdmin" resultMap="adminResult">
+        SELECT * from dormadmin WHERE dormadminPhone = #{dormadminPhone}
+    </select>
+
+    <select id="getStudentByNum" parameterType="Student" resultMap="studentResult">
+        SELECT * from student WHERE studentNum = #{studentNum}
+    </select>
+
+    <insert id="addDormAdmin" parameterType="DormAdmin" keyProperty="dormAdminId" useGeneratedKeys="true" >
+        INSERT INTO dormadmin VALUES (NULL,NULL ,#{dormadminName},#{dormadminPassword},#{dormadminPhone},NULL ,NULL ,
+        NULL,NULL ,1)
+    </insert>
+
+</mapper>

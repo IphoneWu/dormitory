@@ -7,6 +7,7 @@ public class Build {
     private int buildNum;
     private String buildName;
     private int areaNum;
+    private int buildStatus;
 
     public int getAreaNum() {
         return areaNum;
@@ -30,5 +31,13 @@ public class Build {
 
     public void setBuildName(String buildName) {
         this.buildName = buildName;
+    }
+
+    public int getBuildStatus() {
+        return buildStatus;
+    }
+
+    public void setBuildStatus(int buildStatus) {
+        this.buildStatus = buildStatus;
     }
 }

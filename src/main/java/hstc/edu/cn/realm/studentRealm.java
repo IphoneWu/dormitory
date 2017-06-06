@@ -1,7 +1,7 @@
 package hstc.edu.cn.realm;
 
 
-import hstc.edu.cn.po.User;
+import hstc.edu.cn.po.Student;
 import hstc.edu.cn.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -14,7 +14,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-public class MyRealm extends AuthorizingRealm {
+public class studentRealm extends AuthorizingRealm {
 
 	@Autowired
 	private UserService userService;
@@ -29,13 +29,15 @@ public class MyRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken token) throws AuthenticationException {
 
-		String username = (String) token.getPrincipal();
-		User user = userService.getByUsername(username);
+		String studentNum = (String) token.getPrincipal();
+		Student student_1= new Student();
+		student_1.setStudentNum(Integer.parseInt(studentNum));
+		Student student = userService.getStudentByNum(student_1);
 
-		if (user != null) {
-			SecurityUtils.getSubject().getSession().setAttribute("currentUser", user);
+		if (student != null) {
+			SecurityUtils.getSubject().getSession().setAttribute("student", student);
 			AuthenticationInfo authcInfo = new SimpleAuthenticationInfo(
-					user.getUserName(), user.getUserPassword(), "MyRealm");
+					student.getStudentNum(), student.getStudentName(), "MyRealm");
 			return authcInfo;
 		} else {
 			return null;
