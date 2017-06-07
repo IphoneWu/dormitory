@@ -28,8 +28,49 @@
             limit #{start},#{pageSize}
         </if>
     </select>
+
     <select id="getReportTotal" parameterType="Map" resultType="long">
         select count(*) from `report`
     </select>
 
+    <select id="getModifyReport" parameterType="int" resultMap="reportResult">
+        SELECT * from report WHERE reportId=#{reportId}
+    </select>
+
+    <update id="modifyReport" parameterType="Report">
+        UPDATE `report` SET reportTitle = #{reportTitle},reportSummary=#{reportSummary},report=#{report},reportImage=#{reportImage},reportTime = now()
+        WHERE reportId=#{reportId}
+    </update>
+
+    <delete id="deleteReport" parameterType="Integer">
+        DELETE FROM report WHERE reportId in
+        <foreach collection="array" item="reportId" open="(" separator="," close=")">
+            #{reportId}
+        </foreach>
+    </delete>
+    <select id="searchReport" parameterType="Map" resultMap="reportResult">
+        SELECT * FROM report
+        <where>
+            <if test="reportSearch!=null and reportSearch!=''">
+                reportTitle LIKE #{reportSearch}
+                OR reportSummary LIKE #{reportSearch}
+                OR DATE_FORMAT(reportTime,'%Y年%m月%d日') LIKE #{reportSearch}
+                OR reportAuthor LIKE #{reportSearch}
+            </if>
+        </where>
+        <if test="start!=null and pageSize!=null">
+            limit #{start},#{pageSize}
+        </if>
+    </select>
+    <select id="getReportSearchAll" parameterType="Map" resultType="long">
+        SELECT count(*) FROM report
+        <where>
+            <if test="reportSearch!=null and reportSearch!=''">
+                reportTitle LIKE #{reportSearch}
+                OR reportSummary LIKE #{reportSummary}
+                OR DATE_FORMAT(reportTime,'%Y年%m月%d日') LIKE #{reportSearch}
+                OR reportAuthor LIKE #{reportSearch}
+            </if>
+        </where>
+    </select>
 </mapper>

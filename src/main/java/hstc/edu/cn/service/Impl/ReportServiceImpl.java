@@ -27,4 +27,24 @@ public class ReportServiceImpl implements ReportService {
     public long getReportTotal(Map<String, Object> map) {
         return reportMapper.getReportTotal(map);
     }
+
+    public Report getModifyReport(int reportId) {
+        return reportMapper.getModifyReport(reportId);
+    }
+
+    public void modifyReport(Report report) {
+        reportMapper.modifyReport(report);
+    }
+
+    public void deleteReport(Integer[] position) {
+        reportMapper.deleteReport(position);
+    }
+
+    public List<Report> searchReport(Map<String, Object> map) {
+        return reportMapper.searchReport(map);
+    }
+
+    public long getReportSearchAll(Map<String, Object> map) {
+        return reportMapper.getReportSearchAll(map);
+    }
 }

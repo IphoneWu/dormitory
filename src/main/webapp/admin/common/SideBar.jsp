@@ -57,7 +57,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#">查看通告</a></li>
+                    <li><a href="/admin/Report.jsp">查看通告</a></li>
                     <li><a href="/admin/PublishReport.jsp">发布通告</a></li>
                     <li><a href="#">查看留言板</a></li>
                 </ul>
