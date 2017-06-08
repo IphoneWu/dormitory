@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hstc.edu.cn.mapper.RepairMapper">
+    <resultMap type="Repair" id="repairResult">
+        <result property="repairNum" column="repairNum"/>
+        <result property="submitTime" column="submitTime"/>
+        <result property="resolveTime" column="resolveTime"/>
+        <result property="repairReason" column="repairReason"/>
+        <result property="porpertyName" column="porpertyName"/>
+        <result property="addrezz" column="addrezz"/>
+        <result property="studentNum" column="studentNum"/>
+        <result property="dormadminImage" column="dormadminImage"/>
+        <result property="repairStatus" column="repairStatus"/>
+    </resultMap>
+    <select id="getRepair" parameterType="Map" resultMap="repairResult">
+        SELECT * FROM repair
+        <where>
+            <if test="repairStatus!=null and repairStatus!=''">
+                repairStatus=#{repairStatus}
+            </if>
+        </where>
+            <if test="start!=null and pageSize!=null">
+                limit #{start},#{pageSize}
+            </if>
+    </select>
+
+    <select id="getRepairTotal" parameterType="Map" resultType="long">
+        select count(*) from `repair`
+    </select>
+</mapper>

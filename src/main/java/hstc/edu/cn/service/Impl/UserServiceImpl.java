@@ -2,6 +2,7 @@ package hstc.edu.cn.service.Impl;
 
 import hstc.edu.cn.mapper.UserMapper;
 import hstc.edu.cn.po.DormAdmin;
+import hstc.edu.cn.po.RegisterCode;
 import hstc.edu.cn.po.Student;
 import hstc.edu.cn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,9 @@ public class UserServiceImpl implements UserService {
 
     public void addDormAdmin(DormAdmin dormAdmin) {
         userMapper.addDormAdmin(dormAdmin);
+    }
+
+    public RegisterCode getRegisterCode() {
+        return userMapper.getRegisterCode();
     }
 }

@@ -39,5 +39,21 @@ public class CommonServiceImpl implements CommonService {
         return commonMapper.getDormBybuildNum(buildNum);
     }
 
+    public List<Build> getBuildStatus(int areaNum) {
+        return commonMapper.getBuildStatus(areaNum);
+    }
+
+    public void modifyBuildStatus(Build build) {
+        commonMapper.modifyBuildStatus(build);
+    }
+
+    public Build getAdminBuild(Build build) {
+        return commonMapper.getAdminBuild(build);
+    }
+
+    public Area getAdminArea(Area area) {
+        return commonMapper.getAdminArea(area);
+    }
+
 
 }

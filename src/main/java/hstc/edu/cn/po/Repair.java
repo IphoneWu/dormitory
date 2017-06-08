@@ -10,25 +10,25 @@ public class Repair {
     private Date submitTime;
     private Date resolveTime;
     private String repairReason;
-    private int porpertyNum;
-    private int dormNum;
+    private String porpertyName;
+    private String addrezz;
     private int studentNum;
     private int repairStatus;
 
-    public int getDormNum() {
-        return dormNum;
+    public String getAddrezz() {
+        return addrezz;
     }
 
-    public void setDormNum(int dormNum) {
-        this.dormNum = dormNum;
+    public void setAddrezz(String addrezz) {
+        this.addrezz = addrezz;
     }
 
-    public int getPorpertyNum() {
-        return porpertyNum;
+    public String getPorpertyName() {
+        return porpertyName;
     }
 
-    public void setPorpertyNum(int porpertyNum) {
-        this.porpertyNum = porpertyNum;
+    public void setPorpertyName(String porpertyName) {
+        this.porpertyName = porpertyName;
     }
 
     public int getRepairNum() {

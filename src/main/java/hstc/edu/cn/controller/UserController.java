@@ -114,16 +114,20 @@ public class UserController {
         return responseObj;
     }
 
+
     @RequestMapping("/saveDormAdmin")
     @ResponseBody
-    public ResponseObj saveDormAdmin(DormAdmin dormAdmin, Model model){
+    public ResponseObj saveDormAdmin(DormAdmin dormAdmin, Model model,String code){
         dormAdmin.setDormadminPassword(CryptographyUtil.md5(dormAdmin.getDormadminPassword(), "javacoder"));
         ResponseObj responseObj = new ResponseObj();
+        String registerCode = (userService.getRegisterCode().getCode());
         if (userService.getDormAdminByName(dormAdmin) != null) {
             responseObj.setCode(ResponseObj.FAILED);
         }else if (userService.getDormAdminByPhone(dormAdmin) != null) {
             responseObj.setCode(ResponseObj.FAILED);
-        }else{
+        }else if(!(registerCode.equals(code))){
+            responseObj.setCode(ResponseObj.EMPUTY);
+        } else{
             userService.addDormAdmin(dormAdmin);
             responseObj.setCode(ResponseObj.OK);
             responseObj.setMsg("注册成功！恭喜成为本站会员！");

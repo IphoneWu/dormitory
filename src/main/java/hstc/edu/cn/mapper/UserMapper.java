@@ -1,6 +1,7 @@
 package hstc.edu.cn.mapper;
 
 import hstc.edu.cn.po.DormAdmin;
+import hstc.edu.cn.po.RegisterCode;
 import hstc.edu.cn.po.Student;
 
 /**
@@ -13,4 +14,6 @@ public interface UserMapper {
     public DormAdmin getDormAdminByPhone(DormAdmin dormAdmin);
     public Student getStudentByNum(Student student);
     public void addDormAdmin(DormAdmin dormAdmin);
+//    获取注册码
+    public RegisterCode getRegisterCode();
 }

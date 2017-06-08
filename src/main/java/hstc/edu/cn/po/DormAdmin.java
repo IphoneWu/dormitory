@@ -1,5 +1,7 @@
 package hstc.edu.cn.po;
 
+import hstc.edu.cn.util.DateUtil;
+
 import java.util.Date;
 
 /**
@@ -12,17 +14,17 @@ public class DormAdmin {
     private String dormadminPassword;
     private String dormadminPhone;
     private String dormadminSex;
-    private Date dormadminSbirth;
+    private String dormadminSbirth;
     private String dormadminImage;
-    private int buildNum;
+    private String adminAddrezz;
     private int adminType;
 
-    public int getBuildNum() {
-        return buildNum;
+    public String getAdminAddrezz() {
+        return adminAddrezz;
     }
 
-    public void setBuildNum(int buildNum) {
-        this.buildNum = buildNum;
+    public void setAdminAddrezz(String adminAddrezz) {
+        this.adminAddrezz = adminAddrezz;
     }
 
     public int getDormadminId() {
@@ -57,12 +59,12 @@ public class DormAdmin {
         this.dormadminImage = dormadminImage;
     }
 
-    public Date getDormadminSbirth() {
+    public String getDormadminSbirth() {
         return dormadminSbirth;
     }
 
     public void setDormadminSbirth(Date dormadminSbirth) {
-        this.dormadminSbirth = dormadminSbirth;
+        this.dormadminSbirth = DateUtil.formatDate(dormadminSbirth,"yyyy-MM-dd");
     }
 
     public String getDormadminSex() {

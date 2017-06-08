@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hstc.edu.cn.mapper.AdminMapper">
+    <resultMap type="DormAdmin" id="adminResult">
+        <result property="dormadminId" column="dormadminId"/>
+        <result property="dormadminNum" column="dormadminNum"/>
+        <result property="dormadminName" column="dormadminName"/>
+        <result property="dormadminPassword" column="dormadminPassword"/>
+        <result property="dormadminPhone" column="dormadminPhone"/>
+        <result property="dormadminSex" column="dormadminSex"/>
+        <result property="dormadminSbirth" column="dormadminSbirth"/>
+        <result property="dormadminImage" column="dormadminImage"/>
+        <result property="adminAddrezz" column="adminAddrezz"/>
+        <result property="adminType" column="adminType"/>
+    </resultMap>
+
+    <select id="getAllAdmin" resultMap="adminResult">
+        SELECT * from dormadmin WHERE adminType != 1 ORDER BY dormadminId
+    </select>
+    
+    <select id="getNoStaAdmin" resultMap="adminResult">
+        SELECT * FROM  dormadmin WHERE  adminType=0 ORDER BY dormadminId
+    </select>
+
+    <select id="getOneAdmin" parameterType="int" resultMap="adminResult">
+        SELECT * FROM dormadmin WHERE dormadminId = #{dormadminId}
+    </select>
+
+    <update id="modifyAdmin" parameterType="DormAdmin">
+        UPDATE dormadmin SET dormadminNum=#{dormadminNum},dormadminSex=#{dormadminSex},adminAddrezz=#{adminAddrezz},adminType=#{adminType},dormadminSbirth=#{dormadminSbirth} where dormadminId = #{dormadminId}
+    </update>
+
+    <delete id="deleteAdmin" parameterType="int">
+        DELETE FROM dormadmin WHERE dormadminId = #{dormadminId}
+    </delete>
+    <select id="getAdminByNum" parameterType="String" resultMap="adminResult">
+        SELECT * FROM  dormadmin WHERE dormadminNum = #{dormadminNum}
+    </select>
+
+    <update id="updateCode" parameterType="String">
+        UPDATE registercode SET code=#{code} WHERE id=1
+    </update>
+</mapper>

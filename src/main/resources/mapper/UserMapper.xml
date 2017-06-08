@@ -12,7 +12,7 @@
         <result property="dormadminSex" column="dormadminSex"/>
         <result property="dormadminSbirth" column="dormadminSbirth"/>
         <result property="dormadminImage" column="dormadminImage"/>
-        <result property="areaNum" column="areaNum"/>
+        <result property="adminAddrezz" column="adminAddrezz"/>
         <result property="adminType" column="adminType"/>
     </resultMap>
 
@@ -29,6 +29,12 @@
         <result property="clazzName" column="clazzName"/>
         <result property="studentInTime" column="studentInTime"/>
     </resultMap>
+
+    <resultMap id="registerCodeResult" type="RegisterCode">
+        <result property="id" column="id"/>
+        <result property="code" column="code"/>
+    </resultMap>
+
     <select id="getDormAdminByNum" parameterType="DormAdmin" resultMap="adminResult">
           SELECT * from dormadmin WHERE dormadminNum = #{dormadminNum}
     </select>
@@ -45,9 +51,13 @@
         SELECT * from student WHERE studentNum = #{studentNum}
     </select>
 
+    <select id="getRegisterCode" resultMap="registerCodeResult">
+        SELECT * FROM registerCode
+    </select>
+
     <insert id="addDormAdmin" parameterType="DormAdmin" keyProperty="dormAdminId" useGeneratedKeys="true" >
         INSERT INTO dormadmin VALUES (NULL,NULL ,#{dormadminName},#{dormadminPassword},#{dormadminPhone},NULL ,NULL ,
-        NULL,NULL ,1)
+        NULL,NULL ,0)
     </insert>
 
 </mapper>

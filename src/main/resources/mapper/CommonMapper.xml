@@ -58,4 +58,18 @@
     </select>
     <!---->
 
+    <select id="getBuildStatus" parameterType="int" resultMap="buildResult">
+        SELECT * from build WHERE areaNum = #{areaNum} and buildStatus = 0
+    </select>
+
+
+    <update id="modifyBuildStatus" parameterType="Build">
+        UPDATE build SET buildStatus = #{buildStatus}  WHERE buildNum = #{buildNum}
+    </update>
+    <select id="getAdminBuild" parameterType="Build" resultMap="buildResult">
+        SELECT * from build WHERE areaNum = #{areaNum} and buildNum = #{buildNum}
+    </select>
+    <select id="getAdminArea" parameterType="Area" resultMap="areaResult">
+        SELECT * from area WHERE areaNum = #{areaNum}
+    </select>
 </mapper>

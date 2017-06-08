@@ -46,7 +46,6 @@
                 <ul class="treeview-menu">
                     <li><a href="/admin/Student.jsp">查看学生信息</a></li>
                     <li><a href="/admin/ImportStu.jsp">批量录入学生信息</a></li>
-                    <li><a href="">批量导出学生信息</a> </li>
                 </ul>
             </li>
 
@@ -70,8 +69,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#">管理员信息管理</a></li>
-                    <li><a href="#">管理员管理区域</a></li>
+                    <li><a href="/admin/Admin.jsp">管理员信息管理</a></li>
                 </ul>
             </li>
 
@@ -109,7 +107,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="#">友情链接管理</a></li>
-                    <li><a href="#">注册邀请码</a></li>
+                    <li><a href="/admin/RegisterCode.jsp">注册邀请码</a></li>
                     <li><a href="#">刷新系统缓存</a></li>
                     <li><a href="/adminLogout.do">安全退出</a></li>
                 </ul>

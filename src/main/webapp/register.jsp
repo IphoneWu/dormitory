@@ -98,6 +98,11 @@
                 <span class="glyphicon glyphicon-phone form-control-feedback"></span>
                 <div id="adminPhoneError" class="help-block with-errors" style="color: #dd4b39;"></div>
             </div>
+            <div class="form-group has-feedback">
+                <input type="text" id="code" name="code" class="form-control" placeholder="输入注册码...">
+                <span class="glyphicon glyphicon-check form-control-feedback"></span>
+                <div id="codeError" class="help-block with-errors" style="color: #dd4b39;"></div>
+            </div>
 
             <div class="col-xs-12" id="captcha1" style="padding: 0 0;">
             </div>
@@ -259,6 +264,8 @@
                     e.preventDefault();
                 } else {
                     var params = $("#registerForm").serializeArray();
+//                    var code = $("#code").val();
+//                    alert(code)
                     $.ajax({
                         type: 'post',
                         url: '/saveDormAdmin.do',
@@ -277,8 +284,11 @@
                                 window.wxc.xcConfirm(txt, "success", option);
 //                                setTimeout(,10000);
                                 return true;
-                            }else {
+                            }else if (data.code == 0){
                                 window.wxc.xcConfirm("信息注册有误！", window.wxc.xcConfirm.typeEnum.error);
+                                e.preventDefault();
+                            }else {
+                                window.wxc.xcConfirm("注册码有误！", window.wxc.xcConfirm.typeEnum.error);
                                 e.preventDefault();
                             }
                         }
