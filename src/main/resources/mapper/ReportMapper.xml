@@ -24,6 +24,7 @@
                 reportAuthor = #{reportAuthor}
             </if>
         </where>
+        order by reportTime desc
         <if test="start!=null and pageSize!=null">
             limit #{start},#{pageSize}
         </if>
@@ -31,6 +32,11 @@
 
     <select id="getReportTotal" parameterType="Map" resultType="long">
         select count(*) from `report`
+        <where>
+            <if test="reportAuthor!=null and reportAuthor!=''">
+                reportAuthor = #{reportAuthor}
+            </if>
+        </where>
     </select>
 
     <select id="getModifyReport" parameterType="int" resultMap="reportResult">
@@ -58,6 +64,7 @@
                 OR reportAuthor LIKE #{reportSearch}
             </if>
         </where>
+        order by reportTime desc
         <if test="start!=null and pageSize!=null">
             limit #{start},#{pageSize}
         </if>
@@ -72,5 +79,6 @@
                 OR reportAuthor LIKE #{reportSearch}
             </if>
         </where>
+
     </select>
 </mapper>

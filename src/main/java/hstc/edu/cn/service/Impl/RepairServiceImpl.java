@@ -23,4 +23,32 @@ public class RepairServiceImpl implements RepairService {
     public long getRepairTotal(Map<String, Object> map) {
         return repairMapper.getRepairTotal(map);
     }
+
+    public void deleteRepair(Integer[] position) {
+        repairMapper.deleteRepair(position);
+    }
+
+    public Repair getOneRepair(int repairNum) {
+        return repairMapper.getOneRepair(repairNum);
+    }
+
+    public void updateRepair(Repair repair) {
+        repairMapper.updateRepair(repair);
+    }
+
+    public List<Repair> searchRepair(Map<String, Object> map) {
+        return repairMapper.searchRepair(map);
+    }
+
+    public long getRepairSearchAll(Map<String, Object> map) {
+        return repairMapper.getRepairSearchAll(map);
+    }
+
+    public void addRepair(Repair repair) {
+        repairMapper.addRepair(repair);
+    }
+
+    public List<Repair> getRepairByNum(int studentNum) {
+        return repairMapper.getRepairByNum(studentNum);
+    }
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hstc.edu.cn.mapper.LinkMapper">
+    <resultMap type="Link" id="linkResult">
+        <result property="linkId" column="linkId"/>
+        <result property="linkName" column="linkName"/>
+        <result property="linkUrl" column="linkUrl"/>
+    </resultMap>
+
+    <select id="getLink" parameterType="Map" resultMap="linkResult">
+        SELECT * FROM link
+        <where>
+            <if test="linkId!=null">
+                linkId=#{linkId}
+            </if>
+        </where>
+    </select>
+    <insert id="addLink" parameterType="Link" keyProperty="linkId" useGeneratedKeys="true">
+        INSERT INTO link VALUES (NULL ,#{linkName},#{linkUrl})
+    </insert>
+    <update id="updateLink" parameterType="Link">
+        UPDATE link SET linkName=#{linkName},linkUrl=#{linkUrl}
+    </update>
+    <delete id="deleteLink" parameterType="int">
+        DELETE FROM link WHERE linkId=#{linkId}
+    </delete>
+</mapper>

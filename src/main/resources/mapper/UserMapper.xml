@@ -39,6 +39,10 @@
           SELECT * from dormadmin WHERE dormadminNum = #{dormadminNum}
     </select>
 
+    <select id="getDormAdminById" parameterType="int" resultMap="adminResult">
+        SELECT * from dormadmin WHERE dormadminId = #{dormadminId}
+    </select>
+
     <select id="getDormAdminByName" parameterType="DormAdmin" resultMap="adminResult">
         SELECT * from dormadmin WHERE dormadminName = #{dormadminName}
     </select>
@@ -59,5 +63,16 @@
         INSERT INTO dormadmin VALUES (NULL,NULL ,#{dormadminName},#{dormadminPassword},#{dormadminPhone},NULL ,NULL ,
         NULL,NULL ,0)
     </insert>
+
+    <!--修改个人信息-->
+    <update id="modifyDormAdmin" parameterType="DormAdmin">
+        UPDATE dormadmin SET dormadminName=#{dormadminName},dormadminPassword=#{dormadminPassword},dormadminSex=#{dormadminSex},dormadminPhone=#{dormadminPhone},dormadminSbirth=#{dormadminSbirth}
+        WHERE dormadminId=#{dormadminId}
+    </update>
+
+    <!--修改头像-->
+    <update id="modifyAdminImage" parameterType="DormAdmin">
+        UPDATE dormadmin SET dormadminImage=#{dormadminImage} WHERE dormadminId=#{dormadminId}
+    </update>
 
 </mapper>

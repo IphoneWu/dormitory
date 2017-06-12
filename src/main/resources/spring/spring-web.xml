@@ -30,6 +30,7 @@
     <mvc:resources mapping="/dist/**" location="/static/dist/"/>
     <mvc:resources mapping="/images/**" location="/static/images/"/>
     <mvc:resources mapping="/plugins/**" location="/static/plugins/"/>
+    <mvc:resources mapping="/userImageUpload/**" location="static/userImageUpload/"/>
     <mvc:resources mapping="/ueditor1_4_3_3/**" location="/static/ueditor1_4_3_3/"/>
     <mvc:resources mapping="/upload/**" location="/static/upload/"/>
     <mvc:default-servlet-handler/>

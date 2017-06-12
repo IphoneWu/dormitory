@@ -53,9 +53,9 @@
                         <!-- /.box-header -->
 
                         <div class="box-body">
-                            <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap table-responsive">
+                            <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                 <div class="row">
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-12  table-responsive">
                                         <table class="table table-bordered table-hover">
                                             <form  id="modifyAdmin"  method="post" >
                                                 <tr>
@@ -154,6 +154,16 @@
 <script>
     var Num = "${dormAdmin.dormadminNum}";
     $(function () {
+        var type = ${sessionScope.dormAdmin.adminType};
+        if(type==1){
+            $("#m1").show();
+            $("#m2").show();
+            $("#m3").show();
+        }else{
+            $("#m1").hide();
+            $("#m2").hide();
+            $("#m3").hide();
+        }
         $.ajax({
             method: 'post',
             url: '/admin/getAllarea.do',
@@ -204,6 +214,7 @@
                             var txt = "分配成功！";
                             var option = {
                                 onOk: function () {
+
                                     window.location.href = "/admin/Admin.jsp";
                                 }
                             };

@@ -11,16 +11,16 @@
         <result property="porpertyName" column="porpertyName"/>
         <result property="addrezz" column="addrezz"/>
         <result property="studentNum" column="studentNum"/>
-        <result property="dormadminImage" column="dormadminImage"/>
         <result property="repairStatus" column="repairStatus"/>
     </resultMap>
     <select id="getRepair" parameterType="Map" resultMap="repairResult">
         SELECT * FROM repair
         <where>
-            <if test="repairStatus!=null and repairStatus!=''">
+            <if test="repairStatus!=null">
                 repairStatus=#{repairStatus}
             </if>
         </where>
+        order by submitTime desc
             <if test="start!=null and pageSize!=null">
                 limit #{start},#{pageSize}
             </if>
@@ -28,5 +28,70 @@
 
     <select id="getRepairTotal" parameterType="Map" resultType="long">
         select count(*) from `repair`
+        <where>
+            <if test="repairStatus!=null">
+                repairStatus=#{repairStatus}
+            </if>
+        </where>
     </select>
+
+    <delete id="deleteRepair" parameterType="Integer">
+        DELETE FROM repair WHERE repairNum in
+        <foreach collection="array" item="repairNum" open="(" separator="," close=")">
+            #{repairNum}
+        </foreach>
+    </delete>
+
+    <select id="getOneRepair" parameterType="int" resultMap="repairResult">
+        SELECT * FROM repair WHERE repairNum=#{repairNum}
+    </select>
+
+    <update id="updateRepair" parameterType="Repair">
+        UPDATE repair SET resolveTime=now(),repairStatus=#{repairStatus} WHERE repairNum=#{repairNum}
+    </update>
+
+    <select id="searchRepair" parameterType="Map" resultMap="repairResult">
+        SELECT * FROM repair
+        <where>
+            <if test="repairStatus!=null">
+               repairStatus=#{repairStatus}
+            </if>
+            <if test="repairSearch!=null">
+                and (repairNum LIKE #{repairSearch}
+                OR DATE_FORMAT(submitTime,'%Y年%m月%d日') LIKE #{repairSearch}
+                OR repairReason LIKE #{repairSearch}
+                OR porpertyName LIKE #{repairSearch}
+                OR addrezz LIKE #{repairSearch}
+                OR studentNum LIKE #{repairSearch})
+            </if>
+        </where>
+        order by submitTime desc
+        <if test="start!=null and pageSize!=null">
+            limit #{start},#{pageSize}
+        </if>
+    </select>
+    <select id="getRepairSearchAll" parameterType="Map" resultType="long">
+        SELECT count(*) FROM repair
+        <where>
+            <if test="repairStatus!=null">
+               repairStatus=#{repairStatus}
+            </if>
+            <if test="repairSearch!=null and repairSearch!=''">
+                and (repairNum LIKE #{repairSearch}
+                OR DATE_FORMAT(submitTime,'%Y年%m月%d日') LIKE #{repairSearch}
+                OR repairReason LIKE #{repairSearch}
+                OR porpertyName LIKE #{repairSearch}
+                OR addrezz LIKE #{repairSearch}
+                OR studentNum LIKE #{repairSearch})
+            </if>
+        </where>
+    </select>
+
+    <insert id="addRepair" parameterType="Repair" keyProperty="situationId" useGeneratedKeys="true">
+        INSERT INTO repair VALUES (NULL ,now(),NULL ,#{repairReason},#{porpertyName},#{addrezz},#{studentNum},0)
+    </insert>
+    <select id="getRepairByNum" parameterType="int" resultMap="repairResult">
+        SELECT * FROM repair WHERE studentNum=#{studentNum} order by submitTime desc
+    </select>
+
 </mapper>

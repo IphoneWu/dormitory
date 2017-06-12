@@ -145,6 +145,18 @@
     var ue = UE.getEditor('editor');
 </script>
 <script type="text/javascript">
+    $(document).ready(function() {
+        var type = ${sessionScope.dormAdmin.adminType};
+        if(type==1){
+            $("#m1").show();
+            $("#m2").show();
+            $("#m3").show();
+        }else{
+            $("#m1").hide();
+            $("#m2").hide();
+            $("#m3").hide();
+        }
+    });
     function uploadImage() {
         var params = $("#imageUpload").serializeArray();
         $("#imageUpload").ajaxSubmit({

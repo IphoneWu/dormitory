@@ -39,4 +39,16 @@ public class UserServiceImpl implements UserService {
     public RegisterCode getRegisterCode() {
         return userMapper.getRegisterCode();
     }
+
+    public void modifyDormAdmin(DormAdmin dormAdmin) {
+        userMapper.modifyDormAdmin(dormAdmin);
+    }
+
+    public DormAdmin getDormAdminById(int dormadminId) {
+        return userMapper.getDormAdminById(dormadminId);
+    }
+
+    public void modifyAdminImage(DormAdmin dormAdmin) {
+        userMapper.modifyAdminImage(dormAdmin);
+    }
 }

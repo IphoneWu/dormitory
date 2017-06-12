@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hstc.edu.cn.mapper.SituationMapper">
+    <resultMap type="Situation" id="sitResult">
+        <result property="situationId" column="situationId"/>
+        <result property="leaveTime" column="leaveTime"/>
+        <result property="returnTime" column="returnTime"/>
+        <result property="event" column="event"/>
+        <result property="studentNum" column="studentNum"/>
+        <result property="eventStatus" column="eventStatus"/>
+    </resultMap>
+
+    <select id="getSituation" parameterType="Map" resultMap="sitResult">
+        SELECT * FROM situation
+        <where>
+            <if test="eventStatus!=null">
+                eventStatus=#{eventStatus}
+            </if>
+        </where>
+        order by leaveTime desc
+        <if test="start!=null and pageSize!=null">
+            limit #{start},#{pageSize}
+        </if>
+    </select>
+
+    <select id="getSituationTotal" parameterType="Map" resultType="long">
+        select count(*) from `situation`
+        <where>
+            <if test="eventStatus!=null">
+                eventStatus=#{eventStatus}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteSituation" parameterType="Integer">
+        DELETE FROM situation WHERE situationId in
+        <foreach collection="array" item="situationId" open="(" separator="," close=")">
+            #{situationId}
+        </foreach>
+    </delete>
+
+    <select id="getOneSituation" parameterType="int" resultMap="sitResult">
+        SELECT * FROM situation WHERE situationId=#{situationId}
+    </select>
+
+    <update id="updateSituation" parameterType="Situation">
+        UPDATE situation SET eventStatus=#{eventStatus} WHERE situationId=#{situationId}
+    </update>
+
+    <select id="searchSituation" parameterType="Map" resultMap="sitResult">
+        SELECT * FROM situation
+        <where>
+            <if test="eventStatus!=null">
+               eventStatus=#{eventStatus}
+            </if>
+            <if test="sitSearch!=null and sitSearch!=''">
+                AND (situationId = #{sitSearch}
+                OR DATE_FORMAT(leaveTime,'%Y年%m月%d日') LIKE #{sitSearch}
+                OR DATE_FORMAT(returnTime,'%Y年%m月%d日') LIKE #{sitSearch}
+                OR event LIKE #{sitSearch}
+                OR studentNum LIKE #{sitSearch})
+            </if>
+        </where>
+        order by leaveTime desc
+        <if test="start!=null and pageSize!=null">
+            limit #{start},#{pageSize}
+        </if>
+    </select>
+    <select id="getSituationSearchAll" parameterType="Map" resultType="long">
+        SELECT count(*) FROM situation
+        <where>
+            <if test="eventStatus!=null">
+                eventStatus=#{eventStatus}
+            </if>
+            <if test="sitSearch!=null and sitSearch!=''">
+            AND (situationId = #{sitSearch}
+            OR DATE_FORMAT(leaveTime,'%Y年%m月%d日') LIKE #{sitSearch}
+            OR DATE_FORMAT(returnTime,'%Y年%m月%d日') LIKE #{sitSearch}
+            OR event LIKE #{sitSearch}
+            OR studentNum LIKE #{sitSearch})
+            </if>
+        </where>
+    </select>
+
+    <insert id="addSituation" parameterType="Situation" keyProperty="situationId" useGeneratedKeys="true">
+        INSERT into situation VALUES (NULL,now(),NULL ,#{event},#{studentNum},0)
+    </insert>
+    <select id="getSituationByNum" parameterType="int" resultMap="sitResult">
+        SELECT * FROM situation WHERE studentNum=#{studentNum} order by leaveTime desc
+    </select>
+
+</mapper>

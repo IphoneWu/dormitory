@@ -91,7 +91,7 @@
         </form>
         <!-- /.social-auth-links -->
 
-        <a href="#">忘记密码</a><br>
+        <a href="/index.jsp">返回</a><br>
         <a href="register.jsp" class="text-center">没有账号？注册一个</a>
 
     </div>
@@ -127,6 +127,7 @@
                 e.preventDefault();
             } else {
                 var params = $("#loginForm").serializeArray();
+                var type = "${sessionScope.dormAdmin.adminType}";
                 $.ajax({
                     type: 'post',
                     url: '/adminLogin.do',
@@ -137,7 +138,7 @@
                             var txt = "登录成功，进入后台管理";
                             var option = {
                                 onOk: function () {
-                                    window.location.href = "/admin/Main.jsp";
+                                        window.location.href = "/admin/Main.jsp";
                                 }
                             };
                             window.wxc.xcConfirm(txt, "success", option);

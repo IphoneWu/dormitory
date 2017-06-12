@@ -16,4 +16,10 @@ public interface UserMapper {
     public void addDormAdmin(DormAdmin dormAdmin);
 //    获取注册码
     public RegisterCode getRegisterCode();
+//    修改个人信息
+    public void modifyDormAdmin(DormAdmin dormAdmin);
+//    获取管理员信息通过id
+    public DormAdmin getDormAdminById(int dormadminId);
+//    修改用户头像
+    public void modifyAdminImage(DormAdmin dormAdmin);
 }

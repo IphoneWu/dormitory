@@ -160,6 +160,18 @@
     });
 </script>
 <script>
+    $(document).ready(function() {
+        var type = ${sessionScope.dormAdmin.adminType};
+        if(type==1){
+            $("#m1").show();
+            $("#m2").show();
+            $("#m3").show();
+        }else{
+            $("#m1").hide();
+            $("#m2").hide();
+            $("#m3").hide();
+        }
+    });
     <%--$(document).ready(function() {--%>
     <%--editor.setContext("123");--%>
     <%--alert("${report.report}");--%>
@@ -177,6 +189,7 @@
     function submitData() {
 
         var txt = "确定修改吗？";
+        var image = "${report.reportImage}"
         var option = {
             onOk: function () {
                 uploadImage();
@@ -196,6 +209,7 @@
                                 'reportTitle' : title,
                                 'reportSummary' : summary,
                                 'report' : content,
+                                'reportImage':image,
                                 'reportAuthor' : reportAuthor
                             }, function(data) {
                                 if (data.code == 1) {

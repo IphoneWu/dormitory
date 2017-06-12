@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>未审核的报修单</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -39,7 +39,7 @@
         <section class="content-header">
             <h1>
                 报修信息表
-                <small>所有信息</small>
+                <small>未审核的信息</small>
             </h1>
         </section>
 
@@ -59,10 +59,10 @@
 
                                     </div>
                                     <div class="col-sm-5" style="text-align: right;">
-                                        <input type="text" id="reportSearch" name="reportSearch" class="form-control" placeholder="搜索...">
+                                        <input type="text" id="repairSearch" name="repairSearch" class="form-control" placeholder="搜索...">
                                         <button type="submit" id="searchSubmit" name="searchSubmit" class="btn btn-primary" onclick="searchRepair(1)">查询</button>
-                                        <button type="submit" id="deleteReport" name="deleteReport" class="btn btn-danger" onclick="deleteRepair()">删除</button>
-                                        <button type="submit" id="refleshReport" name="refleshReport" class="btn btn-success" onclick="refleshRepair()" style="display: none;">刷新</button>
+                                        <button type="submit" id="deleteRepair" name="deleteRepair" class="btn btn-danger" onclick="deleteRepair()">删除</button>
+                                        <button type="submit" id="refleshRepair" name="refleshRepair" class="btn btn-success" onclick="refleshRepair()" style="display: none;">刷新</button>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -153,6 +153,16 @@
     var next = (currentPage+1);
 
     $(document).ready(function() {
+        var type = ${sessionScope.dormAdmin.adminType};
+        if(type==1){
+            $("#m1").show();
+            $("#m2").show();
+            $("#m3").show();
+        }else{
+            $("#m1").hide();
+            $("#m2").hide();
+            $("#m3").hide();
+        }
         $("#mainTable").empty();
         $.ajax({
             type:'post',
@@ -170,11 +180,11 @@
                             '<td class="sorting_1"><input  type="checkbox" name="position" value="'+item.repairNum+'"></td>' +
                             '<td class="sorting_1">'+item.repairNum+'</td>' +
                             '<td class="sorting_1">'+new Date((item.submitTime)).Format("yyyy-MM-dd hh:mm:ss")+'</td>' +
-                            '<td class="sorting_1">'+item.repairReason+'</td>' +
+                            '<td class="sorting_1">'+item.repairReason.substr(0, 10)+'</td>' +
                             '<td class="sorting_1">'+item.porpertyName+'</td>' +
                             '<td class="sorting_1">'+item.addrezz+'</td>' +
                             '<td class="sorting_1">'+item.studentNum+'</td>' +
-                            '<td class="sorting_1"><a href="/admin/repair/getModifyRepair.do?repairNum='+item.repairNum+'">修改</a></td></tr>')
+                            '<td class="sorting_1"><a href="/admin/repair/getRepair.do?repairNum='+item.repairNum+'">修改</a></td></tr>')
                 });
                 $("#list").append('<li class="paginate_button previous" id="example1_previous"><a id="pre"  href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">上一页</a></li>');
                 $('#pre').attr('href','JavaScript:getTable('+(pre)+');');
@@ -224,11 +234,11 @@
                             '<td class="sorting_1"><input  type="checkbox" name="position" value="'+item.repairNum+'"></td>' +
                             '<td class="sorting_1">'+item.repairNum+'</td>' +
                             '<td class="sorting_1">'+new Date((item.submitTime)).Format("yyyy-MM-dd hh:mm:ss")+'</td>' +
-                            '<td class="sorting_1">'+item.repairReason+'</td>' +
+                            '<td class="sorting_1">'+item.repairReason.substr(0, 10)+'</td>' +
                             '<td class="sorting_1">'+item.porpertyName+'</td>' +
                             '<td class="sorting_1">'+item.addrezz+'</td>' +
                             '<td class="sorting_1">'+item.studentNum+'</td>' +
-                            '<td class="sorting_1"><a href="/admin/repair/getModifyRepair.do?repairNum='+item.repairNum+'">修改</a></td></tr>')
+                            '<td class="sorting_1"><a href="/admin/repair/getRepair.do?repairNum='+item.repairNum+'">修改</a></td></tr>')
                 });
                 $("#list").empty();
                 $("#list").append('<li class="paginate_button previous" id="example1_previous"><a id="pre"  href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">上一页</a></li>');
@@ -324,11 +334,11 @@
                             '<td class="sorting_1"><input  type="checkbox" name="position" value="'+item.repairNum+'"></td>' +
                             '<td class="sorting_1">'+item.repairNum+'</td>' +
                             '<td class="sorting_1">'+new Date((item.submitTime)).Format("yyyy-MM-dd hh:mm:ss")+'</td>' +
-                            '<td class="sorting_1">'+item.repairReason+'</td>' +
+                            '<td class="sorting_1">'+item.repairReason.substr(0, 10)+'</td>' +
                             '<td class="sorting_1">'+item.porpertyName+'</td>' +
                             '<td class="sorting_1">'+item.addrezz+'</td>' +
                             '<td class="sorting_1">'+item.studentNum+'</td>' +
-                            '<td class="sorting_1"><a href="/admin/repair/getModifyRepair.do?repairNum='+item.repairNum+'">修改</a></td></tr>')
+                            '<td class="sorting_1"><a href="/admin/repair/getRepair.do?repairNum='+item.repairNum+'">修改</a></td></tr>')
                 });
                 $("#list").empty();
                 $("#list").append('<li class="paginate_button previous" id="example1_previous"><a id="pre"  href="#" aria-controls="example1" data-dt-idx="0" tabindex="0">上一页</a></li>');

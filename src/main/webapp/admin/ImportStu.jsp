@@ -108,6 +108,18 @@
 <script type="text/javascript" src="/static/plugins/jQuery-confirm/xcConfirm.js"></script>
 
 <script type="text/javascript">
+    $(document).ready(function() {
+        var type = ${sessionScope.dormAdmin.adminType};
+        if(type==1){
+            $("#m1").show();
+            $("#m2").show();
+            $("#m3").show();
+        }else{
+            $("#m1").hide();
+            $("#m2").hide();
+            $("#m3").hide();
+        }
+    });
     function check() {
         var txt = "确定提交吗？";
         var option = {

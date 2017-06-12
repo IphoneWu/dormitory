@@ -102,6 +102,18 @@
 <script src="/static/plugins/form/jquery.form.min.js"></script>
 <script type="text/javascript" src="/static/plugins/jQuery-confirm/xcConfirm.js"></script>
 <script>
+    $(document).ready(function() {
+        var type = ${sessionScope.dormAdmin.adminType};
+        if(type==1){
+            $("#m1").show();
+            $("#m2").show();
+            $("#m3").show();
+        }else{
+            $("#m1").hide();
+            $("#m2").hide();
+            $("#m3").hide();
+        }
+    });
     function registerCode() {
         $("#code").empty();
         $.ajax({

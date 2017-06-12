@@ -74,6 +74,7 @@ public class ReportController {
         report.setReportImage(reportImage);
         reportService.addReport(report);
         responseObj.setCode(ResponseObj.OK);
+        session.removeAttribute("reportImage");
         return responseObj;
     }
 
@@ -126,11 +127,12 @@ public class ReportController {
     public ResponseObj modifyReport(Report report,HttpSession session){
         ResponseObj responseObj = new ResponseObj();
         String reportImage = (String) session.getAttribute("reportImage");
-        if(report.getReportImage()==null||report.getReportImage()==""||!(report.getReportImage().equals(reportImage))){
+        if(reportImage!=null){
             report.setReportImage(reportImage);
         }
         reportService.modifyReport(report);
         responseObj.setCode(ResponseObj.OK);
+        session.removeAttribute("reportImage");
         return responseObj;
     }
 

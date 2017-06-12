@@ -20,12 +20,17 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="/static/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="/static/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="/static/plugins/cropperjs/cropper.min.css">
+    <link rel="stylesheet" href="/static/plugins/cropperjs/main.css">
     <!-- jQuery 2.2.3 -->
     <script src="/static/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
     <script src="/static/bootstrap/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
     <script src="/static/dist/js/app.min.js"></script>
+    <script src="/static/plugins/cropperjs/cropper.min.js"></script>
+    <script src="/static/plugins/cropperjs/main.js"></script>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <header class="main-header">
@@ -54,6 +59,19 @@
     <footer class="main-footer">
         <jsp:include page="common/Footer.jsp"/>
     </footer>
-
+<script>
+    $(document).ready(function() {
+        var type = ${sessionScope.dormAdmin.adminType};
+        if(type==1){
+            $("#m1").show();
+            $("#m2").show();
+            $("#m3").show();
+        }else{
+            $("#m1").hide();
+            $("#m2").hide();
+            $("#m3").hide();
+        }
+    });
+</script>
 </body>
 </html>

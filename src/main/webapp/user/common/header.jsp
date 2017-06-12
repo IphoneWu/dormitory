@@ -6,114 +6,135 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<style>
-    body {
-        margin: 0 auto;
-        padding: 0;
-        font-size: 12px;
-        text-align: center;
-        color: #33322e;
-        font-family: "微软雅黑","宋体", Tahoma, sans-serif;
-    }
-    .logo{
-        width: 335px;
-        height: 95px;
-        float: left;
-        background: url("/static/images/logo.jpg");
-    }
-    .navbar-inverse .navbar-brand {
-        color: white;
-    }
-    .navbar-inverse .navbar-nav>li{
-        font-size: 14px;
-        padding: 0 5px;
-    }
-
-
-    /*.navbar .nav >li>a:hover{*/
-    /*color: #000000;*/
-    /*background-color:white ;*/
-    /*}*/
-    .isearch{
-        margin-top: 10px;
-        margin-left: 15px;
-        display: block;
-        width: 100%;
-        height: 28px;
-        font-size: 14px;
-        line-height: 1.42857143;
-        color: #555;
-        background-color: #d6d6d6;
-        background-image: none;
-        border: 1px solid #474747;
-        border-radius: 20px;
-        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-        padding-top: 6px;
-        padding-right: 12px;
-        padding-bottom: 6px;
-        padding-left: 12px;
-    }
-
-</style>
-<nav>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-static-top" style="margin-left: 0;">
+    <div class="container">
         <div class="navbar-header">
-            <!-- .navbar-toggle样式用于toggle收缩的内容，即nav-collapse collapse样式所在元素 -->
-            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#mynav">
-                <span class="sr-only">Toggle Navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+            <a href="/user/Main.jsp" class="navbar-brand"><b>韩山师范学院</b>宿舍管理</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                <i class="fa fa-bars"></i>
             </button>
-            <!-- 确保无论是宽屏还是窄屏，navbar-brand都显示 -->
-            <a href="index.jsp" class="navbar-brand" style="font-size: 20px">韩山师范学院</a>
         </div>
-        <!-- 屏幕宽度小于768px时，div.navbar-responsive-collapse容器里的内容都会隐藏，显示icon-bar图标，当点击icon-bar图标时，再展开。屏幕大于768px时，默认显示。 -->
-        <div class="colcollapse navbar-collapse navbar-responsive-collapse" id="mynav">
-            <ul class="nav navbar-nav" style="padding-left: 150px;">
-                <li class="active"><a href="/user/Main.jsp">首页</a></li>
-                <li><a href="">查询入口</a></li>
-                <li><a href="">申请入口</a></li>
-                <li><a href="">保修入口</a></li>
-                <li><a href="">通告</a></li>
-                <li><input class="isearch" placeholder="搜索本站..." type="text"></li>
-                <li>
-                    <button class="btn btn-black" type="submit" style="margin-top: 10px;margin-left: 15px;">
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li ><a href="/user/Main.jsp">首页</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">查询入口<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/user/MySituation.jsp">我的请假</a></li>
+                        <li><a href="/user/MyRepair.jsp">我的报修</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">申请入口 <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/user/AddSituation.jsp">请假申请</a></li>
+                        <li><a href="/user/AddRepair.jsp">报修申请</a></li>
+                    </ul>
+                </li>
+            </ul>
+                <div class="navbar-form navbar-left form-group">
+                    <input type="text" class="form-control" id="reportSearch" placeholder="搜索本站...">
+                    <button class="btn btn-black" type="submit" onclick="searchReport(1)">
                         <i class="glyphicon glyphicon-search"></i>
                     </button>
-                </li>
-                <li class="dropdown user user-menu" id="loginLi" style="margin-left: 100px;"><!-- Menu Toggle Button -->
-                    <a href="#" class="dropdown-toggle pull-right" data-toggle="dropdown">
+                </div>
+        </div>
+        <!-- /.navbar-collapse -->
+        <!-- Navbar Right Menu -->
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <li class="dropdown user user-menu">
+                    <!-- Menu Toggle Button -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <!-- The user image in the navbar-->
-                        <img src="/static/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                        <img src="/static/upload/image/avatar.png" class="user-image" alt="User Image">
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                        <span class="hidden-xs"></span>
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu" style="border-color: #000000;">
                         <!-- The user image in the menu -->
                         <li class="user-header">
-                            <img src="/static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img src="/static/upload/image/avatar.png" class="img-circle" alt="User Image">
 
-                            <p style="color:#000000;">
+                            <p style="color: #000000;">
                                 ${sessionScope.userName}
-                                <small></small>
                             </p>
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
-                            <div class="pull-left">
-                                <a href="" class="btn btn-default btn-flat">修改用户信息</a>
-                            </div>
-                            <div class="pull-right">
+                            <div class="text-center">
                                 <a href="/stulogout.do" class="btn btn-default btn-flat">注销登录</a>
                             </div>
                         </li>
                     </ul>
+                </li>
+
             </ul>
         </div>
+        <!-- /.navbar-custom-menu -->
     </div>
+    <!-- /.container-fluid -->
 </nav>
+
+<script>
+    var totalNum;
+    var currentPage;
+    var pageAmount;
+    var pre = (currentPage-1);
+    var next = (currentPage+1);
+    function searchReport(page) {
+        $("#mainContent").empty();
+        var reportSearch=$("#reportSearch").val();
+        $.ajax({
+            type: 'post',
+            url: '/reportSearch.do?page='+page+'&reportSearch='+reportSearch,
+            async: false,
+            success: function (data) {
+                totalNum = data.totalNum;
+                currentPage=data.pageNum;
+                pageAmount =data.pageAmount;
+                pre=(currentPage-1);
+                next=(currentPage+1);
+                $.each(data.data, function(i,item){
+                    $("#mainContent").empty();
+                    $("#mainContent").append('<div class="post">' +
+                            '<div class="post-head"> ' +
+                            '<h1 class="post-title"><a href="JavaScript:ReadReport('+(item.reportId)+')">'+item.reportTitle+'</a></h1>' +
+                            '</div>' +
+                            '<div class="post-meta" style="color: #959595;margin: 14px 0 0;">' +
+                            '<span class="author">管理员:<a href="" target="_blank">'+item.reportAuthor+'</a> </span>· <time class="post-date">'+new Date((item.reportTime)).Format("yyyy-MM-dd hh:mm:ss")+'</time>' +
+                            '</div>' +
+                            '<div class="featured-media"> <a href="JavaScript:ReadReport('+(item.reportId)+')"> <img class="img-responsive center-block" src="'+item.reportImage+'" alt="" ></a>' +
+                            '</div>' +
+                            '<div class="post-content"> <p></p> <p>'+item.reportSummary+'</p> <p></p> ' +
+                            '</div>' +
+                            '<div class="post-permalink"> <a href="JavaScript:ReadReport('+(item.reportId)+')" class="btn btn-default">阅读全文</a></div> <footer class="post-footer clearfix"></footer>' +
+                            '</div>');
+                    var isimage = item.reportImage;
+                    if(isimage==null){
+                        $(".featured-media").empty();
+                    }
+                });
+                if (pageAmount==1){
+                    $("#mainContent").append('<nav class="pagination" role="navigation"><span class="page-number">第 '+currentPage+' 页 / 共 '+pageAmount+' 页</span> ');
+                } else if(currentPage==pageAmount) {
+                    $("#mainContent").append('<nav class="pagination" role="navigation">' +
+                            '<a class="newer-posts" href="JavaScript:searchReport('+(pre)+')"> <i class="fa fa-angle-left"  style="background-color: #f4645f;color: white;"></i></a>' +
+                            '<span class="page-number">第 '+currentPage+' 页 / 共 '+pageAmount+' 页</span>' +
+                            '</nav>');
+                }else if(pre==0){
+                    $("#mainContent").append('<nav class="pagination" role="navigation"><span class="page-number">第 '+currentPage+' 页 / 共 '+pageAmount+' 页</span> ' +
+                            '<a class="older-posts" href="JavaScript:searchReport('+(next)+')"><i class="fa fa-angle-right" style="background-color: #f4645f;color: white;"></i></a></nav>');
+                } else {
+                    $("#mainContent").append('<nav class="pagination" role="navigation">' +
+                            '<a class=" newer-posts" href="JavaScript:searchReport('+(pre)+')"> <i class="fa fa-angle-left"  style="background-color: #f4645f;color: white;"></i></a>' +
+                            '<span class="page-number">第 '+currentPage+' 页 / 共 '+pageAmount+' 页</span>' +
+                            '<a class="older-posts" href="JavaScript:searchReport('+(next)+')"><i class="fa fa-angle-right"  style="background-color: #f4645f;color: white;"></i></a>' +
+                            '</nav>');
+                }
+            }
+        });
+
+    }
+</script>
