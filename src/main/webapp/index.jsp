@@ -12,16 +12,16 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath }/static/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="/static/dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath }/static/dist/css/AdminLTE.min.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="/static/plugins/iCheck/square/blue.css">
-  <link rel="stylesheet" href="/static/plugins/jQuery-confirm/xcConfirm.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath }/static/plugins/iCheck/square/blue.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath }/static/plugins/jQuery-confirm/xcConfirm.css">
   <style>
     body {
       margin: 0 auto;
@@ -335,12 +335,12 @@
   </div>
 </div>
 <!-- jQuery 2.2.3 -->
-<script src="/static/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="${pageContext.request.contextPath }/static/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="/static/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/static/plugins/jQuery-confirm/xcConfirm.js"></script>
-<script src="gt.js"></script>
-<script src="/static/dist/js/DateUtil.js"></script>
+<script src="${pageContext.request.contextPath }/static/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/static/plugins/jQuery-confirm/xcConfirm.js"></script>
+<script src="${pageContext.request.contextPath }/gt.js"></script>
+<script src="${pageContext.request.contextPath }/static/dist/js/DateUtil.js"></script>
 
 <script>
   var totalNum;
@@ -353,7 +353,7 @@
     getIndexReport(1);
     $.ajax({
       type: 'post',
-      url: '/getIndexLink.do',
+      url: '${pageContext.request.contextPath }/getIndexLink.do',
       async: false,
       success: function (data) {
         $.each(data.data, function(i,item){
@@ -371,7 +371,7 @@
     $("#mainContent").empty();
     $.ajax({
       type:'post',
-      url:'/IndexreportList.do?page='+page,
+      url:'${pageContext.request.contextPath }/IndexreportList.do?page='+page,
       async: false,
       success:function (data) {
         totalNum = data.totalNum;
@@ -387,7 +387,7 @@
                   '<div class="post-meta" style="color: #959595;margin: 14px 0 0;">' +
                   '<span class="author">管理员:<a href="" target="_blank">'+item.reportAuthor+'</a> </span>· <time class="post-date">'+new Date((item.reportTime)).Format("yyyy-MM-dd hh:mm:ss")+'</time>' +
                   '</div>' +
-                  '<div class="featured-media"> <a href="JavaScript:ReadReport('+(item.reportId)+')"> <img class="img-responsive center-block" src="'+item.reportImage+'" alt="" ></a>' +
+                  '<div class="featured-media"> <a href="JavaScript:ReadReport('+(item.reportId)+')"> <img class="img-responsive center-block" src="${pageContext.request.contextPath }'+item.reportImage+'" alt="" ></a>' +
                   '</div>' +
                   '<div class="post-content"> <p></p> <p>'+item.reportSummary+'</p> <p></p> ' +
                   '</div>' +
@@ -423,7 +423,7 @@
     $("#mainContent").empty();
     $.ajax({
       type:'post',
-      url:'/ReadReport.do?reportId='+reportId,
+      url:'${pageContext.request.contextPath }/ReadReport.do?reportId='+reportId,
       async: false,
       success:function (data) {
         $("#mainContent").append('<div class="post">' +
@@ -433,7 +433,7 @@
                 '<div class="post-meta" style="color: #959595;margin: 14px 0 0;">' +
                 '<span class="author">管理员:<a href="" target="_blank">'+data.data.reportAuthor+'</a> </span>· <time class="post-date">'+new Date((data.data.reportTime)).Format("yyyy-MM-dd hh:mm:ss")+'</time>' +
                 '</div>' +
-                '<div class="featured-media"> <a href="JavaScript:ReadReport('+(data.data.reportId)+')"> <img class="img-responsive center-block" src="'+data.data.reportImage+'" alt="" ></a>' +
+                '<div class="featured-media"> <a href="JavaScript:ReadReport('+(data.data.reportId)+')"> <img class="img-responsive center-block" src="${pageContext.request.contextPath }'+data.data.reportImage+'" alt="" ></a>' +
                 '</div>' +
                 '<div class="post-content">'+data.data.report+' ' +
                 '</div>' +
@@ -452,7 +452,7 @@
     var reportSearch=$("#reportSearch").val();
     $.ajax({
       type: 'post',
-      url: '/reportSearch.do?page='+page+'&reportSearch='+reportSearch,
+      url: '${pageContext.request.contextPath }/reportSearch.do?page='+page+'&reportSearch='+reportSearch,
       async: false,
       success: function (data) {
         totalNum = data.totalNum;
@@ -469,7 +469,7 @@
                   '<div class="post-meta" style="color: #959595;margin: 14px 0 0;">' +
                   '<span class="author">管理员:<a href="" target="_blank">'+item.reportAuthor+'</a> </span>· <time class="post-date">'+new Date((item.reportTime)).Format("yyyy-MM-dd hh:mm:ss")+'</time>' +
                   '</div>' +
-                  '<div class="featured-media"> <a href="JavaScript:ReadReport('+(item.reportId)+')"> <img class="img-responsive center-block" src="'+item.reportImage+'" alt="" ></a>' +
+                  '<div class="featured-media"> <a href="JavaScript:ReadReport('+(item.reportId)+')"> <img class="img-responsive center-block" src="${pageContext.request.contextPath }'+item.reportImage+'" alt="" ></a>' +
                   '</div>' +
                   '<div class="post-content"> <p></p> <p>'+item.reportSummary+'</p> <p></p> ' +
                   '</div>' +
@@ -515,7 +515,7 @@
         var params = $("#studentForm").serializeArray();
         $.ajax({
           type: 'post',
-          url: '/studentLogin.do',
+          url: '${pageContext.request.contextPath }/studentLogin.do',
           data: params,
           async: false,
           success: function (data) {
@@ -523,7 +523,7 @@
               var txt=  "登录成功";
               var option = {
                 onOk: function () {
-                  window.location.href = "/user/Main.jsp"
+                  window.location.href = "${pageContext.request.contextPath }/user/Main.jsp"
                 }
               };
               window.wxc.xcConfirm(txt, "success", option);
@@ -561,7 +561,7 @@
   });
 
   function gotoLoginJsp() {
-    window.location.href = "/login.jsp"
+    window.location.href = "${pageContext.request.contextPath }/login.jsp"
 
   }
 </script>
