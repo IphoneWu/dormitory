@@ -196,7 +196,7 @@ public class UserController {
                 request.getSession().getServletContext());
 
         String path;
-        //检查form中是否有enctype="multipart/form-data"
+        //检查form中是否有enctype="multipart/form-data撒大苏打"
         if (multipartResolver.isMultipart(request)) {
             //将request变成多部分request
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
